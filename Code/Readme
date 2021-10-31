@@ -4,4 +4,10 @@ This is My CW1 Subbmission
 Please Open Demo.py First
 
 Demo.py is a python script that uses the Generate.py Functions
-Generate.py is a python File that has my main code in the form of useable functions to keep my code organized and Easy to read  
+Generate.py is a python File that has my main code in the form of useable functions to keep my code organized and Easy to read 
+
+If you are missing any libraries please Run Install-Packages.bat 
+it will install Numpy and Tkinter
+
+Numpy : Math Lib
+Tkinter: Window,Canvases Lib 
