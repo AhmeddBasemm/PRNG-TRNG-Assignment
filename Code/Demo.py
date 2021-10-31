@@ -7,7 +7,6 @@ TKH ID# 202000188
 '''
 import Generator as G
 
-print("\nPlease Use a Squarable Number")
 n = G.GetNumber()
 Seed = G.GetSeed()
 
@@ -25,14 +24,14 @@ def Display(MyList,Label):
 
 #Quick Demo of the Encryption Functions
 def EncryptionDemo():
-    print("\n"+(50*"-") + "Start Encryption")
+    print(3*"\n"+(50*"-") + "Start Encryption")
     keysetting = [19,1.5,31,3.5]
 
     #Generating 2 Random Number as a Key
     print("Generating Keys for Caesar cipher")
     CeaserKey = G.CLCGList(Seed,keysetting,2)
 
-    print("This is a caesar cipher example using a random generated number Please enter a peice of text to cipher")
+    print("This is a caesar cipher example using a random generated number Please enter a piece of text to cipher")
     #Take User input to encrypt it
     _text = input("The Text: ")
 

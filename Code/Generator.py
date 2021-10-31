@@ -52,7 +52,7 @@ def SetupCanvas(CanvasSize,_BitmapSize):
 #Value Error Handling
 def GetNumber():
     #Get User input
-    userinput = input("\nHow Many Number Do You Need: ")
+    userinput = input("\nHow Many Number Do You Need?\n")
     
     #Check if user inputs number only
     try:
@@ -71,7 +71,7 @@ def GetNumber():
 #Value Error Handling
 def GetSeed():
     print("\nPlease type in a Number")
-    print("Use 'time' to use the system time as the seed")
+    print("Or Use 'time' to use the system time as the seed")
     #Get User input
     userinput = input("The Seed: ")
     
@@ -287,9 +287,7 @@ def Encrypt(text,key):
 #Mini Game
 def MiniGame(key):
     text = "Cat"
-    print(70*"*")
-    print(70*"*")
-    print("\n"+(50*"-") + "Bonus Challenge")
+    print(3*"\n"+(50*"-") + "Bonus Challenge")
     
     
     Encrypt(text,key)
@@ -338,7 +336,7 @@ def MiniGame(key):
                  ; '   : :`-:     _.`* ;
               .*' /  .*' ; .*`- +'  `*' 
               `*-*   `*-*  `*-*'""")
-        surprise(text, key)
+        MiniGame(key)
 #------------------------------------------------------------------------------
 
     
