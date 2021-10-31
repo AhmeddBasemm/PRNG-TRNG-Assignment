@@ -6,8 +6,12 @@ Please Open Demo.py First
 Demo.py is a python script that uses the Generate.py Functions
 Generate.py is a python File that has my main code in the form of useable functions to keep my code organized and Easy to read 
 
+For Windows Users:
 If you are missing any libraries please Run Install-Packages.bat 
 it will install Numpy and Tkinter
 
 Numpy : Math Lib
 Tkinter: Window,Canvases Lib 
+
+For Mac/Linux
+Please Make Sure you Install Numpy and Tk Packages
