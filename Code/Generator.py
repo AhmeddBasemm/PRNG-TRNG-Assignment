@@ -163,6 +163,7 @@ def CLCGList(_seed,settings,n,f = False):
     #Using a combination of user input and time
     y1 = _seed
     y2 = Seconds
+        
     
     #Loop for generating N numbers
     for i in range(0, n):

@@ -6,6 +6,7 @@ Ahmed Basem Ahmed Alsaeed Ali
 TKH ID# 202000188
 '''
 import Generator as G
+from time import sleep
 
 n = G.GetNumber()
 Seed = G.GetSeed()
@@ -19,6 +20,7 @@ Keys = [[715,3.5,375,1.5],[3.5,1.5,375]]
 def Display(MyList,Label):
     print("\n"+(50*"-") + "Start",Label)
     G.printNumbers(MyList)
+    
     print("\n"+(50*"-") + "Done",Label)  
     G.Statistics(MyList)
 
@@ -36,13 +38,15 @@ def EncryptionDemo():
     _text = input("The Text: ")
 
     G.Encrypt(_text,int(CeaserKey[0]))
+    sleep(2)
     G.MiniGame(int(CeaserKey[1]))
 
 #True: Whole Numbers False(Default): Float Numbers
 Display(G.CLCGList(Seed, Keys[0], n,True),"CLCG")
+sleep(1)
 Display(G.LCGList(Seed, Keys[1], n),"LCG")
 
 EncryptionDemo()
 
 #True: Show Numbers False(Default): Hide Numbers 
-G.DrawBitMap(Seed,Keys,True)
+G.DrawBitMap(Seed,Keys,False)
