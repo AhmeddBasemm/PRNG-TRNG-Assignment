@@ -46,7 +46,7 @@ Display(G.CLCGList(Seed, Keys[0], n,True),"CLCG")
 sleep(1)
 Display(G.LCGList(Seed, Keys[1], n),"LCG")
 
-EncryptionDemo()
+#EncryptionDemo()
 
 #True: Show Numbers False(Default): Hide Numbers 
-G.DrawBitMap(Seed,Keys,False)
+G.DrawBitMap(Seed,Keys,True)
