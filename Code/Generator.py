@@ -14,14 +14,13 @@ import numpy as np
 #Intializing Variables
 #------------------------------------------------------------------------------
 
-# Bitmap Dimension variable / number of random numbers per Row
-BitmapSize = 20
-
-#Bitmap pixel Dimension (0.5 to avoid the overlaping of pixels)
+#NumMap Dimension variable / number of random numbers per Row
+NumMapSize = 20
+#NumMap pixel Dimension (0.5 to avoid the overlaping of pixels)
 PixelRadius = 0.5
-
-#BitMap pixel Scale Factor
+#NumMap pixel Scale Factor
 SF = 0
+
 
 #initializing Variables for the Canvas
 canvasLCG = 0
@@ -34,20 +33,18 @@ windowCLCG = 0
 def SetupCanvas(CanvasSize,_BitmapSize):
     
     #Refrence to the global variables
-    global SF,BitmapSize,canvasLCG,canvasCLCG,windowLCG,windowCLCG
-    
-    # Bitmap dimension variable / Number of random numbers per Row
-    BitmapSize =  int(int(_BitmapSize**(1/2)))
+    global SF,NumMapSize,canvasLCG,canvasCLCG,windowLCG,windowCLCG
+    # NumMap dimension variable / Number of random numbers per Row
+    NumMapSize =  int(int(_BitmapSize**(1/2)))
     # Calculate pixel scale factor
-    SF = CanvasSize/BitmapSize
+    SF = CanvasSize/NumMapSize
     
     #initalize window for LCG & CLCG canvases
     windowLCG = Tk()
     windowCLCG = Tk()
-    
     #Change the windows titles
-    windowLCG.title("Linear Congruential Generator "+ str(BitmapSize**2) + " Numbers")
-    windowCLCG.title("Combined Linear Congruential Generator "+ str(BitmapSize**2) + " Numbers")
+    windowLCG.title("Linear Congruential Generator "+ str(NumMapSize**2) + " Numbers")
+    windowCLCG.title("Combined Linear Congruential Generator "+ str(NumMapSize**2) + " Numbers")
     
     #Setting up the canvases dimensions
     canvasLCG = Canvas(windowLCG,height=CanvasSize,width=CanvasSize)
@@ -56,35 +53,34 @@ def SetupCanvas(CanvasSize,_BitmapSize):
 #Value Error Handling
 def GetNumber():
     #Get user input
-    userinput = input("\nHow Many Number Do You Need?\n")
-    
+    userinput = input("\nHow many number do you need?\n")
     #Check if user inputs number only
     try:
         #If number, assign it to seed
          Number= int(userinput)
          if Number <= 0:
-             print("Please Try a +ve Number Try again!")
+             print("Please try a +ve number, Try Again!")
              Number = GetNumber()
+
     except ValueError:
         #Prompt the user to try again
-        print("Please Use a Number Try again!")
+        print("Please use a number, Try Again!")
         Number = GetNumber()
-    
     #Return number value
     return Number
 #------------------------------------------------------------------------------ 
 #Value Error Handling
 def GetSeed():
-    print("\nPlease type in a Number")
-    print("Or Use 'time' to use the system time as the seed")
+    print("\nPlease type in a number")
+    print("Or use the word 'time' to use the system time as the seed")
     #Get user input
     userinput = input("The Seed: ")
-    
     #Check if user inputs number or text
     try:
         #if number assign it to seed
          Seed= int(userinput)
          print("-->PRNG Mode")
+
     except ValueError:
         #If string compare with time key 
         if userinput.lower() == "time":
@@ -94,15 +90,13 @@ def GetSeed():
             print("Time", )
         else:
             #Prompt user to try again
-            print("-->Invalid Please Try Again")
+            print("-->Invalid Please Try Again!")
             Seed = GetSeed()
-    
     #Return seed value
     return Seed
 #------------------------------------------------------------------------------
 #Statistics Calculator
 def Statistics(numbers):
-    
     #Standard deviation
     std = np.std(numbers)
     #Variance
@@ -117,7 +111,6 @@ def Statistics(numbers):
     print(50*"-" + "Done Stats")
 #------------------------------------------------------------------------------
 #Linear Congruential Generator
-
 #Seed
 #Settings:[a,c,m] list of values of a,c,m 
 #n: number of random generated Numbers
@@ -125,7 +118,6 @@ def Statistics(numbers):
 def LCGList(_seed,settings,n,f = False):
     #Initalizing a list of size n to store numbers
     r = [0] * n
-    
     a = settings[0]#Multiplier
     c = settings[1]#Increment
     m = settings[2]#Modulus
@@ -134,28 +126,22 @@ def LCGList(_seed,settings,n,f = False):
     for i in range(0, n):
         #Calculating the random Number
         _seed = ((a*_seed)+c)%m
-        
         #Float Value as a percentage btw 0 & 1
         if f:
             #Fraction from m
             r[i] = _seed/m 
-            
         else:
             #Whole number
             r[i] = int(_seed)
-        
     #Return the random number list of size n
     return r
 #------------------------------------------------------------------------------
 #Combined Linear Congruential Generator
-
 #Seed
 #Settings:[m1,a1,m2,a2] list of values of m1,a1,m2,a2
 #n: number of random generated Numbers
 #f: Toggle to calculate whole numbers or a percentage from m 
-
 #CLCG decreases the chances of redundancy in numbers and increases the period
-
 def CLCGList(_seed,settings,n,f = False):
     #Initalizing a list of size n to store numbers
     r = [0] * n
@@ -176,11 +162,9 @@ def CLCGList(_seed,settings,n,f = False):
         #Calculating 2 LCG numbers
         y1 = a1 * y1 % m1
         y2 = a2 * y2 % m2
-        
         #The M1 value controls the maximum number range
         #Calculating a combined LCG random number
         x = (y1 - y2) % m1
-        
         #f is a toggle to return numbers in a fraction format between 0 & 1
         #Adding the values to the list r
         if f:
@@ -226,27 +210,24 @@ def CreatePixel(x, y, s, canvasName, C,text,T = False):
     if T:
         canvasName.create_text(x, y, text=text, fill="red", font=('Helvetica 15 bold',int(0.3*s)))
 #------------------------------------------------------------------------------
-def DrawBitMap(_Seed,Keys,T):
+def DrawNumMap(_Seed,Keys,T):
     #looping variable
     j = 0
-    
     #Creating 2 lists to store the random numbers in both Formats(Integers, Float)
-    Combined  = CLCGList(_Seed,Keys[0],BitmapSize**2,True)
-    CombinedF = CLCGList(_Seed,Keys[0],BitmapSize**2)
-    
+    Combined  = CLCGList(_Seed,Keys[0],NumMapSize**2,True)
+    CombinedF = CLCGList(_Seed,Keys[0],NumMapSize**2)
     #Creating 2 lists to store the random numbers in both Formats(Integers, Float)
-    Linear = LCGList(_Seed,Keys[1],BitmapSize**2,True)
-    LinearF = LCGList(_Seed,Keys[1],BitmapSize**2)
+    Linear = LCGList(_Seed,Keys[1],NumMapSize**2,True)
+    LinearF = LCGList(_Seed,Keys[1],NumMapSize**2)
     
     # Drawing bitmap
-    for y in range(BitmapSize):
-        for x in range(BitmapSize):
+    for y in range(NumMapSize):
+        for x in range(NumMapSize):
             
             #CLCG
             #Creating a pixel at the right position with the right color & Number representation
             Text = str(CombinedF[j]) + "\n" +"{:.2f}".format(Combined[j])
             CreatePixel((x*SF)+(SF/2), (y*SF)+(SF/2), PixelRadius*SF, canvasCLCG,Combined[j],Text,T)
-            
             #LCG
             #Creating a pixel at the right position with the right color & Number representation
             Text = str(LinearF[j]) + "\n" +"{:.2f}".format(Linear[j])
@@ -265,13 +246,15 @@ def DrawBitMap(_Seed,Keys,T):
 #------------------------------------------------------------------------------
 #Ceaser Cipher Encrypting function (Takes a string for text and int for a key)
 def Encrypt(text,key):
-    
     #Initializing empty string
     cipher = ""
     #Skip symbols in ASCII Table before offset value
     offset = 65
     #Modulus to loop through the Characters
     m = 123
+    #Make sure cipher key is not = 0
+    if key == 0:
+        key += 3
     
     #Looping through the letters of the Text
     for letter in text:
@@ -279,7 +262,7 @@ def Encrypt(text,key):
         asci = ord(letter)
         
         #Shifting Ascii code 
-        asci = (asci + key)%m
+        asci = (asci + (key))%m
         
         #Staying within the characters region of the ASCII table
         if asci+offset < m:
@@ -289,8 +272,6 @@ def Encrypt(text,key):
     
     print("The Cipher:",cipher)        
     print("The key is: + "+str(key))
-    print("\n"+(50*"*") + "Encyption Done")
-    
     #Return encrypted text
     return cipher
 #------------------------------------------------------------------------------
