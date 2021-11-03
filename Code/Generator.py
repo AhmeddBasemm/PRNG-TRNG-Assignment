@@ -20,7 +20,8 @@ NumMapSize = 20
 PixelRadius = 0.5
 #NumMap pixel Scale Factor
 SF = 0
-
+#Holds the Period of LCG or CLCG
+period = 0
 
 #initializing Variables for the Canvas
 canvasLCG = 0
@@ -30,16 +31,17 @@ windowCLCG = 0
 
 #------------------------------------------------------------------------------
 #Seting Up Canvases
-def SetupCanvas(CanvasSize,_BitmapSize):
+#CanvasSize: Dimension,n: the number of genertaed numbers
+def SetupCanvas(CanvasSize,n):
     
     #Refrence to the global variables
     global SF,NumMapSize,canvasLCG,canvasCLCG,windowLCG,windowCLCG
     # NumMap dimension variable / Number of random numbers per Row
-    NumMapSize =  int(int(_BitmapSize**(1/2)))
+    NumMapSize =  int(int(n**(1/2)))
     # Calculate pixel scale factor
     SF = CanvasSize/NumMapSize
     
-    #initalize window for LCG & CLCG canvases
+    #Initalize window for LCG & CLCG canvases
     windowLCG = Tk()
     windowCLCG = Tk()
     #Change the windows titles
@@ -104,10 +106,12 @@ def Statistics(numbers):
     #Mean | Average
     avg = sum(numbers)/len(numbers)
     #Period(Unique numbers count)
-    period =int(len(list(dict.fromkeys(numbers))))
+    #crating a dictionary from the list to eliminate any duplicates
+    Unique =int(len(list(dict.fromkeys(numbers))))
     
     print("Average:",avg,"\nStandard Deviation:",std,"\nVariance:",variance)
-    print("Total Numbers",int(len(numbers)),"\nUnique Numbers Count:", period)
+    print("Total Numbers",int(len(numbers)),"\nUnique Numbers Count:", Unique)
+    print("Period:", period)
     print(50*"-" + "Done Stats")
 #------------------------------------------------------------------------------
 #Linear Congruential Generator
@@ -116,6 +120,7 @@ def Statistics(numbers):
 #n: number of random generated Numbers
 #f: Toggle to calculate whole numbers or a percentage from m 
 def LCGList(_seed,settings,n,f = False):
+    global period
     #Initalizing a list of size n to store numbers
     r = [0] * n
     a = settings[0]#Multiplier
@@ -133,6 +138,7 @@ def LCGList(_seed,settings,n,f = False):
         else:
             #Whole number
             r[i] = int(_seed)
+    period = "Not Calculated"
     #Return the random number list of size n
     return r
 #------------------------------------------------------------------------------
@@ -143,6 +149,8 @@ def LCGList(_seed,settings,n,f = False):
 #f: Toggle to calculate whole numbers or a percentage from m 
 #CLCG decreases the chances of redundancy in numbers and increases the period
 def CLCGList(_seed,settings,n,f = False):
+    
+    global period
     #Initalizing a list of size n to store numbers
     r = [0] * n
     
@@ -155,6 +163,7 @@ def CLCGList(_seed,settings,n,f = False):
     y1 = _seed
     y2 = time.time()
         
+    period = ((m1-1)*(m2-1))/((2**2)-1)
     
     #Loop for generating n numbers
     for i in range(0, n):
@@ -171,7 +180,7 @@ def CLCGList(_seed,settings,n,f = False):
             r[i] = x / m1
         else:
             r[i] = int(x)
-            
+    
     #return the random number list of size n
     return r
 #------------------------------------------------------------------------------

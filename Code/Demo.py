@@ -18,14 +18,14 @@ Seed = G.GetSeed()
 
 #True: Show Numbers, False(Default): Hide Numbers 
 #Show/Hide on Numbers on Bitmap Toggle
-ShowNumbersOnCanvas = True
+ShowNumbersOnCanvas = False
 
 #[CLCG[m1,a1,m2,a2],LCG[a,c,m]]
 Keys = [[715,3.5,375,1.5],[3.5,1.5,375]]
 
 #True: Float Numbers, False: Whole Numbers
 #Output Float Values Setting [CLCG,LCG]
-FloatOutputSetting = [True,False]
+FloatOutputSetting = [False,False]
 
 #Setup Canvas Size and Number of output Values
 
@@ -71,5 +71,5 @@ Display(G.LCGList(Seed, Keys[1], n,FloatOutputSetting[1]),"LCG")
 #Run an Encryption Demo
 EncryptionDemo()
 G.SetupCanvas(800,n)
-#Calling DrawBit Map Function and Passing the Right Parameters
+#Calling Draw Number Map Function and Passing the Right Parameters
 G.DrawNumMap(Seed,Keys,ShowNumbersOnCanvas)
