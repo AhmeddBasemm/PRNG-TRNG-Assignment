@@ -29,7 +29,6 @@ FloatOutputSetting = [False,False]
 
 #Setup Canvas Size and Number of output Values
 
-
 #Function to Generate Numbers with a Header, a Footer, and Statistics
 def Display(MyList,Label):
     
