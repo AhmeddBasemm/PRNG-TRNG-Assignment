@@ -4,8 +4,10 @@ Ahmed Basem Ahmed Alsaeed Ali
 TKH ID# 202000188
 '''
 
-#Importing tkinter library to create canvases 
+#Importing tkinter library to create canvases'
+# And file Dialog window
 from tkinter import *
+from tkinter import filedialog
 #Importing system time library
 import time
 #Importing math library for Statistics
@@ -13,7 +15,6 @@ import numpy as np
 
 #Intializing Variables
 #------------------------------------------------------------------------------
-
 #NumMap Dimension variable / number of random numbers per Row
 NumMapSize = 20
 #NumMap pixel Dimension (0.5 to avoid the overlaping of pixels)
@@ -75,6 +76,7 @@ def GetNumber():
 def GetSeed():
     print("\nPlease type in a number")
     print("Or use the word 'time' to use the system time as the seed")
+    print("Or use the word 'file' to Select a text file")
     #Get user input
     userinput = input("The Seed: ")
     #Check if user inputs number or text
@@ -89,12 +91,40 @@ def GetSeed():
             #Use System Time
             Seed = time.time()
             print("-->TRNG Mode")
-            print("Time", )
+            print("Time", Seed)
+        elif userinput.lower() == "file":
+            print("-->PRNG File Mode")
+            # Get Seed from file
+            Seed = openfile()
+            
         else:
             #Prompt user to try again
             print("-->Invalid Please Try Again!")
             Seed = GetSeed()
     #Return seed value
+    return Seed
+#------------------------------------------------------------------------------
+# Get Seed from file function
+def openfile():
+    print("Please Select a file")
+    #Open Window for User to Select a File 
+    SelectFileWindow = Tk()
+    SelectFileWindow.withdraw()
+
+    #Retrieve a file from the file dialog menu
+    filepath =  filedialog.askopenfilename()
+
+    try:
+        #try opening the file
+        file = open(filepath,"r")
+        #try to read the file
+        Seed = int(file.read())
+        #Success statement 
+        print("Seed Retrieved:",Seed)
+    except:
+        #Incase of faliure prompt user to try again
+        print("-->Invalid file name. Please Try Again!")
+        openfile()
     return Seed
 #------------------------------------------------------------------------------
 #Statistics Calculator
