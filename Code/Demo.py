@@ -21,11 +21,11 @@ Seed = G.GetSeed()
 ShowNumbersOnCanvas = False
 
 #[CLCG[m1,a1,m2,a2],LCG[a,c,m]]
-Keys = [[715,3.5,375,1.5],[3.5,1.5,375]]
+Keys = [[715,3.5,375,1.5],[3.5,1.5,397]]
 
 #True: Float Numbers, False: Whole Numbers
 #Output Float Values Setting [CLCG,LCG]
-FloatOutputSetting = [False,False]
+FloatOutputSetting = [True,False]
 
 #Setup Canvas Size and Number of output Values
 
@@ -61,12 +61,12 @@ def EncryptionDemo():
     #Calling the MiniGame Function
     G.MiniGame(int(CeaserKey[1]))
 
-#Generate CLCG Number List and Display it
-Display(G.CLCGList(Seed, Keys[0], n,FloatOutputSetting[0]),"CLCG")
-#Delay for 1 second to enhance User Experience
-sleep(1)
 #Generate LCG Number List and Display it
 Display(G.LCGList(Seed, Keys[1], n,FloatOutputSetting[1]),"LCG")
+#Delay for 1 second to enhance User Experience
+sleep(1)
+#Generate CLCG Number List and Display it
+Display(G.CLCGList(Seed, Keys[0], n,FloatOutputSetting[0]),"CLCG")
 #Run an Encryption Demo
 EncryptionDemo()
 G.SetupCanvas(800,n)

@@ -281,7 +281,7 @@ def DrawNumMap(_Seed,Keys,T):
     
     #Opening Windows
     windowLCG.mainloop()        
-    windowCLCG.mainloop() 
+    windowCLCG.mainloop()
 #------------------------------------------------------------------------------
 #Ceaser Cipher Encrypting function (Takes a string for text and int for a key)
 def Encrypt(text,key):
